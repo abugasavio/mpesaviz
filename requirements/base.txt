@@ -33,3 +33,6 @@ django-autoslug==1.8.0
 pytz==2015.4
 
 # Your custom requirements go here
+celery==3.1.18
+# Smartmin for django 1.8
+git+git://github.com/nyaruka/smartmin.git@995361b21491018c8d9d604b977158d0ba63ea20

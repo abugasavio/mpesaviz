@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from smartmin.views import SmartCRUDL, SmartListView
+from .models import Transaction
 
-# Create your views here.
+
+class TransactionCRUDL(SmartCRUDL):
+    permissions = False
+    model = Transaction
