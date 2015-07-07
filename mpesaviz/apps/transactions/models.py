@@ -15,3 +15,8 @@ class Transaction(TimeStampedModel):
     sent_by = models.CharField(max_length=30, blank=True)
     account_number = models.CharField(max_length=30)
     airtime_for = models.CharField(max_length=30)
+
+
+class UploadFile(TimeStampedModel):
+    type = models.CharField(choices=Transaction.TYPES, max_length=20, default=Transaction.TYPES.sent)
+    file = models.FileField(upload_to='uploads/')
