@@ -43,8 +43,9 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'mpesaviz.users',  # custom users app
-    # Your stuff: custom apps go here
+    'mpesaviz.apps.users',
+    'mpesaviz.apps.dashboard',
+    'mpesaviz.apps.transactions'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -34,11 +34,12 @@
 
   <body>
 
-    <div class="header navbar">
+    <div class="header navbar-inverse">
       <div class="container">
-        <a class="navbar-brand" href="/">mpesaviz</a>
+        <a class="navbar-brand" href="/">Mpesa Viz</a>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'home' %}">Dashboard</a></li>
+          <li><a href="{% url 'home' %}">Upload</a></li>
           <li><a href="{% url 'about' %}">About</a></li>
 
           {% if request.user.is_authenticated %}
