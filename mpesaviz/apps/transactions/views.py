@@ -37,6 +37,17 @@ class TransactionCRUDL(SmartCRUDL):
                                                         amount=float(transaction['Amount'].replace(",", "")), type=file_type, phonenumber=PhoneNumber.from_string(transaction['No.'], 'KE')))
                     except NumberParseException:
                         pass
+
+                # received transactions
+                if file_type == Transaction.TYPES.received:
+                    try:
+                        date = time.strptime(transaction['Date'], '%d/%m/%Y %H:%M:%S')
+                        date = datetime(*date[:6])
+                        transactions.append(Transaction(code=transaction['\xef\xbb\xbf"Code"'], date=date, sent_by=transaction['Sent By'],
+                                                        amount=float(transaction['Amount'].replace(",", "")), type=file_type))
+                    except NumberParseException:
+                        pass
+
             Transaction.objects.bulk_create(transactions)
 
 
