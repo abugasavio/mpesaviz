@@ -13,7 +13,6 @@ from .forms import UploadFileForm
 
 
 class GraphDataView(View):
-
     def get(self, request, *args, **kwargs):
         data_type = request.GET.get('type')
 
@@ -21,14 +20,13 @@ class GraphDataView(View):
             data = [{'name': 'Sent', 'data': [166342]}, {'name': 'Received', 'data': [429847]}]
 
         elif data_type == 'top_recipients':
-            top_recipeints = Transaction().top_recipients()
-
+            top_recipients = Transaction().top_recipients()
             data = [{
-                "name": "Recipient",
-                "data": [row['recipient'] for index, row in top_recipeints.iterrows()]
+                'name': 'Recipient',
+                'data': [row['recipient'] for index, row in top_recipients.iterrows()]
             }, {
-                "name": "Amounts",
-                "data": [int(row['amount']) for index, row in top_recipeints.iterrows()]
+                'name': 'Amounts',
+                'data': [int(row['amount']) for index, row in top_recipients.iterrows()]
             }]
         else:
             groups = Transaction().monthly_transactions()
