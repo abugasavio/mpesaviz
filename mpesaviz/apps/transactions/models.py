@@ -2,6 +2,7 @@ from django.db import models
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
 from phonenumber_field.modelfields import PhoneNumberField
+from django_pandas.io import read_frame
 
 
 class Transaction(TimeStampedModel):
@@ -17,6 +18,20 @@ class Transaction(TimeStampedModel):
     sent_by = models.CharField(max_length=30, blank=True)
     account_number = models.CharField(max_length=30)
     airtime_for = models.CharField(max_length=30)
+
+    def monthly_transactions(self):
+        dataframe = read_frame(Transaction.objects.all())
+        dataframe['month'] = [date.strftime('%B') for date in dataframe['date']]
+        dataframe['year'] = [date.strftime('%Y') for date in dataframe['date']]
+        groups = dataframe.groupby(['year', 'month', 'type'])['amount'].sum().reset_index(name='amount')
+        return groups
+
+    def top_recipients(self):
+        dataframe = read_frame(Transaction.objects.all())
+        recipient_dataframe = dataframe[dataframe.type == 'Sent Transactions']
+        return recipient_dataframe.groupby(['recipient', 'type'])['amount'].sum().reset_index(name='amount').sort('amount', ascending=False)
+
+
 
 
 class UploadFile(TimeStampedModel):
