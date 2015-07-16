@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-    <div id="column_2015" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    <div id="line_all_time" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    <div id="all_time_sent_vs_received" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    <div id="top_recipients" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div id="column_2015" style="min-width: 310px; height: 500px; margin: 100 auto"></div>
+    <div id="line_all_time" style="min-width: 310px; height: 500px; margin: 100 auto"></div>
+    <div id="all_time_sent_vs_received" style="min-width: 310px; height: 200px; margin: 100 auto"></div>
+    <div id="top_recipients" style="min-width: 310px; height: 700px; margin: 100 auto"></div>
 {% endblock content %}
  {% block extra-script %}
 <script src="http://code.highcharts.com/highcharts.js"></script>
@@ -57,7 +57,11 @@
                 borderWidth: 0
             }
         },
-        series: [{}]
+        series: [{}],
+        colors : [
+            '#ff9900',
+            '#0099ff'
+        ]
         };
 
     var url =  "{% url 'data' %}";
@@ -118,7 +122,11 @@ $(function () {
                 borderWidth: 0
             }
         },
-        series: [{}]
+        series: [{}],
+        colors : [
+            '#ff9900',
+            '#0099ff'
+        ]
         };
 
     var url =  "{% url 'data' %}";
@@ -182,7 +190,11 @@ $(function () {
         credits: {
             enabled: false
         },
-        series: [{}]
+        series: [{}],
+        colors : [
+            '#ff9900',
+            '#0099ff'
+        ]
     }
 
 
@@ -200,7 +212,7 @@ $(function () {
         chart: {
             renderTo: 'top_recipients',
             type: 'column',
-            marginRight: 130,
+            marginRight: 10,
             marginBottom: 150
         },
         title: {
@@ -237,7 +249,10 @@ $(function () {
             y: 100,
             borderWidth: 0
         },
-        series: []
+        series: [],
+        colors : [
+            '#ff9900'
+        ]
     }
 
     var url =  "{% url 'data' %}?type=top_recipients";
